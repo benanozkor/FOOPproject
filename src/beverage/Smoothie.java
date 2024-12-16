@@ -2,5 +2,5 @@ package beverage;
 
 import beverage.Cold;
 
-public class Smoothie extends Cold {
+public abstract class Smoothie extends Cold {
 }

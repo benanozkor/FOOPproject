@@ -1,4 +1,6 @@
 package beverage;
 
-public abstract class Coffee extends Hot {
+public class Coffee extends Hot {
+
+
 }

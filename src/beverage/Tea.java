@@ -1,6 +1,4 @@
 package beverage;
 
-import beverage.Hot;
-
-public abstract class Tea extends Hot {
+public class Tea extends Hot {
 }

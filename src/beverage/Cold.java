@@ -1,7 +1,9 @@
 package beverage;
 
-public abstract class Cold extends Beverage {
+public class Cold extends Beverage {
 
-
-
+    @Override
+    public void welcome(){
+        System.out.println("Welcome to Bet Cafe");
+    }
 }

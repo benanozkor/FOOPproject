@@ -1,6 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Gay Black Person!");
+        System.out.println("Welcome to the BetCafe!");
 
     }
 }

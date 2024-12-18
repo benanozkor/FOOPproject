@@ -7,14 +7,14 @@ abstract class Book extends BETcafe {
     private String author;
     private int numberOfPages;
     private double price;
-    private String ISBN;
+    private int publicationYear;
 
-    public Book(String title,String author, int numberOfPages, double price, String ISBN){
-        this.title =title;
-        this.author =author;
-        this.numberOfPages = numberOfPages;
-        this.price= price;
-        this.ISBN=ISBN;
+    public Book(String title, String author, int numberOfPages, double price, int publicationYear){
+        this.title=title;
+        this.author=author;
+        this.numberOfPages=numberOfPages;
+        this.price=price;
+        this.publicationYear=publicationYear;
     }
 
     public String getTitle() {
@@ -49,15 +49,16 @@ abstract class Book extends BETcafe {
         this.price = price;
     }
 
-    public String getISBN() {
-        return ISBN;
+    public int getPublicationYear() {
+        return publicationYear;
     }
 
-    public void setISBN(String ISBN) {
-        this.ISBN = ISBN;
+    public void setPublicationYear(int publicationYear) {
+        this.publicationYear = publicationYear;
     }
 
     public abstract String genreDescription();
+    public abstract String bookDescription();
 
     public double applyDiscount(double discountPer){
         return (price - (price*discountPer /100));

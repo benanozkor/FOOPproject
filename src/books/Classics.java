@@ -3,11 +3,12 @@ package books;
 public class Classics extends Book {
 
     @Override
-    public String bookDescription() {
+    public String genreDescription() {
         return "World classics are to express successful novels that continue to be read and admired even after many years and are among the best examples of the genre.";
     }
-    public Classics("Pride and Prejudice", " Jane Austen", 448, 302.72, 1813){
-        super(title, author, numberOfPages, price, publicationYear); //help @tuna elina error veriyo nası çözcem neyi yanlış yapıyorum
+
+    public Classics(String title, String author, int numberOfPages, double price, int publicationYear){
+        super(title, author, numberOfPages, price, publicationYear);
     }
 
 }

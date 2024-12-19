@@ -1,7 +1,7 @@
 package books;
 import betPack.BETcafe;
 
-abstract class Book extends BETcafe {
+ public abstract class Book extends BETcafe {
 
     private String title;
     private String author;
@@ -58,7 +58,7 @@ abstract class Book extends BETcafe {
     }
 
     public abstract String genreDescription();
-    public abstract String bookDescription();
+   // public abstract String bookDescription();
 
     public double applyDiscount(double discountPer){
         return (price - (price*discountPer /100));

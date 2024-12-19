@@ -2,14 +2,17 @@ package food;
 
 public class Desserts extends Food {
 
+
     @Override
     public void setFoodType(String foodType) {
         super.setFoodType("Desert");
     }
 
-    public Desserts(){
+    public Desserts(int calories, String foodType, boolean forVegans){
+        super(calories,foodType, forVegans);
 
     }
+    public Desserts(){}
 
 
 

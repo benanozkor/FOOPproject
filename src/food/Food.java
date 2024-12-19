@@ -12,6 +12,11 @@ public abstract class Food extends BetCafe {
     public Food(){
 
     }
+    public Food(int calories, String foodType, boolean forVegans){
+        this.calories= calories;
+        this.foodType = foodType;
+        this.forVegans = forVegans;
+    }
 
     public int getCalories() {
         return calories;

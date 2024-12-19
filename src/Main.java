@@ -8,6 +8,8 @@ public class Main {
 
         Desserts desserts = new Cookies();
         Desserts desserts1 = desserts;
+        Desserts desserts2 = new Desserts(234,"salty", false);
+        System.out.println(desserts2.getFoodType());
         desserts1.welcome();
 
 

@@ -1,29 +1,23 @@
 package books;
 import betPack.BETcafe;
+import java.util.*;
+
 
  public abstract class Book extends BETcafe {
 
-    private String title;
+    //private String title;
     private String author;
-    private int numberOfPages;
-    private double price;
-    private int publicationYear;
+    private String bookDescription;
+    private String price;
 
-    public Book(String title, String author, int numberOfPages, double price, int publicationYear){
-        this.title=title;
+
+    public Book(String author, String bookDescription, String price){
         this.author=author;
-        this.numberOfPages=numberOfPages;
+        this.bookDescription=bookDescription;
         this.price=price;
-        this.publicationYear=publicationYear;
+
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     public String getAuthor() {
         return author;
@@ -33,35 +27,23 @@ import betPack.BETcafe;
         this.author = author;
     }
 
-    public int getNumberOfPages() {
-        return numberOfPages;
-    }
+     public String getBookDescription() {
+         return bookDescription;
+     }
 
-    public void setNumberOfPages(int numberOfPages) {
-        this.numberOfPages = numberOfPages;
-    }
+     public void setBookDescription(String bookDescription) {
+         this.bookDescription = bookDescription;
+     }
 
-    public double getPrice() {
-        return price;
-    }
+     public String getPrice() {
+         return price;
+     }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
+     public void setPrice(String price) {
+         this.price = price;
+     }
 
-    public int getPublicationYear() {
-        return publicationYear;
-    }
+     public abstract String genreDescription();
 
-    public void setPublicationYear(int publicationYear) {
-        this.publicationYear = publicationYear;
-    }
 
-    public abstract String genreDescription();
-   // public abstract String bookDescription();
-
-    public double applyDiscount(double discountPer){
-        return (price - (price*discountPer /100));
-        //*******how can i overload this?????//
-    }
 }

@@ -5,13 +5,8 @@ public class Desserts extends Food {
     double sugarAmount;
 
 
-    @Override
-    public void setFoodType(String foodType) {
-        super.setFoodType("Desert");
-    }
-
-    public Desserts(int calories, String foodType, String productName, boolean forVegans, String description){
-        super(calories,foodType, productName,forVegans, description);
+    public Desserts(String productName, double productPrise, int calories, String foodType, boolean forVegans, String foodContent){
+        super(productName,productPrise,calories,foodType,forVegans,foodContent);
 
     }
     public Desserts(){}

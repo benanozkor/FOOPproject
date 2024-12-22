@@ -7,6 +7,8 @@ public class Main implements PrintOptions{
         Scanner scanner = new Scanner(System.in);
         String costumerInput;
 
+        MenuManager menuManager = new MenuManager();
+
         String booksContent = """
                 Welcome to Books section!
                 --------------------
@@ -37,7 +39,6 @@ public class Main implements PrintOptions{
         String booksFileName = "BooksSection.txt";
 
 
-
         while (true) {
             try {
                 PrintOptions.welcomePrint();
@@ -58,17 +59,22 @@ public class Main implements PrintOptions{
                     // Print the file content
                     fileManager.printMenuFileContent();
                     costumerInput = scanner.nextLine();
+                    Food chosenProduct = menuManager.getProduct(costumerInput);
+                    if (chosenProduct != null) {
+                        System.out.println("You chose: " + chosenProduct.getProductName());
+                        System.out.println("Price: $" + chosenProduct.getProductPrise());
+                    } else {
+                        System.out.println("Sorry, we don't have " + chosenProduct + " on the menu.");
+                    }
                 }
             } catch (NullPointerException exception) {
                 System.out.println("Input can not be null! Please enter your choice" + exception.getMessage());
             } catch (Exception exception) {
                 System.out.println("Invalid value! Please enter your choice" + exception.getMessage());
             }
+
+
         }
-
-
-
     }
-
 
 }

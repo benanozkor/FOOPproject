@@ -2,9 +2,9 @@ package food;
 
 public class Salty extends Food {
 
-    @Override
-    public void setFoodType(String foodType) {
-        super.setFoodType("Salty");
+
+    public Salty(String productName, double productPrise, int calories, String foodType, boolean forVegans, String foodContent){
+        super(productName,productPrise,calories,foodType,forVegans,foodContent);
     }
 
     @Override

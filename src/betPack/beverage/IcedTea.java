@@ -1,29 +1,38 @@
 package betPack.beverage;
 
-public class IcedTea extends Cold {
+class IcedTea extends Cold {
 
-    public static final IcedTea ICED_BLACK_TEA = new IcedTea("Iced Black Tea", 45, "Refreshing black iced tea");
-    public static final IcedTea ICED_GREEN_TEA = new IcedTea("Iced Green Tea", 50, "Refreshing green iced tea");
-    public static final IcedTea ICED_HERBAL_TEA = new IcedTea("Iced Herbal Tea", 55, "Refreshing and healty herbal tea");
-    public static final IcedTea BERRY_HIBISCUS = new IcedTea("Berry Hibiscus", 70, "Refreshing, tangy drink made with hibiscus and berries");
+    private static final IcedTea[] ICED_TEAS = {
+            new IcedTea("Lemon Iced Tea", 80, "Refreshing lemon iced tea", new Recipe("Black tea", "Lemon", "Ice cubes", "Sugar (optional)")),
+            new IcedTea("Peach Iced Tea", 85, "Sweet peach iced tea", new Recipe("Black tea", "Peach syrup", "Ice cubes")),
+            new IcedTea("Mint Iced Tea", 90, "Cooling mint-flavored iced tea", new Recipe("Green tea", "Mint leaves", "Ice cubes", "Honey (optional)")),
+            new IcedTea("Berry Iced Tea", 95, "Berry-infused iced tea", new Recipe("Black tea", "Mixed berry syrup", "Ice cubes")),
+            new IcedTea("Hibiscus Iced Tea", 100, "Floral and tangy hibiscus iced tea", new Recipe("Hibiscus tea", "Ice cubes", "Lemon slice", "Honey (optional)"))
+    };
 
     private String description;
+    private Recipe recipe;
 
-    private IcedTea(String name, double price, String description) {
+    public IcedTea(String name, double price, String description, Recipe recipe) {
         super(name, price, Size.Small, true);
         this.description = description;
+        this.recipe = recipe;
     }
+
     @Override
     public String getDescription() {
         return description;
     }
 
+    public Recipe getRecipe() {
+        return recipe;
+    }
+
     public static void displayAllIcedTeas() {
-        IcedTea[] icedTeas = {ICED_BLACK_TEA, ICED_GREEN_TEA, ICED_HERBAL_TEA, BERRY_HIBISCUS };
-        for (IcedTea icedTea : icedTeas) {
-            icedTea.display();
-            System.out.println("Description: " + icedTea.getDescription());
-            System.out.println("Price: " + icedTea.getPrice());
+        for (IcedTea icedTea : ICED_TEAS) {
+            System.out.println(icedTea.getName() + ": " + icedTea.getDescription());
+            System.out.println("Recipe: " + icedTea.getRecipe());
+            System.out.println();
         }
     }
 }

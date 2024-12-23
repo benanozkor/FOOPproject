@@ -1,16 +1,17 @@
 package betPack.beverage;
+class Tea extends Hot {
 
-public class Tea extends Hot{
-
-    public static final Tea BLACK_TEA = new Tea("Black Tea", 40,"Traditional black tea");
-    public static final Tea GREEN_TEA = new Tea("Green Tea", 45,"Healty green tea");
-    public static final Tea HERBAL_TEA = new Tea("Herbal Tea", 50,"Tea made with various herbs");
+    public static final Tea GREEN_TEA = new Tea("Green Tea", 60, "Healthy green tea", new Recipe("Green tea leaves", "Hot water"));
+    public static final Tea BLACK_TEA = new Tea("Black Tea", 50, "Traditional black tea", new Recipe("Black tea leaves", "Hot water"));
+    public static final Tea HERBAL_TEA = new Tea("Herbal Tea", 70, "Relaxing herbal tea", new Recipe("Herbal mix", "Hot water"));
 
     private String description;
+    private Recipe recipe;
 
-    private Tea(String name, double price, String description) {
+    public Tea(String name, double price, String description, Recipe recipe) {
         super(name, price, Size.Small);
         this.description = description;
+        this.recipe = recipe;
     }
 
     @Override
@@ -18,12 +19,16 @@ public class Tea extends Hot{
         return description;
     }
 
+    public Recipe getRecipe() {
+        return recipe;
+    }
+
     public static void displayAllTeas() {
-        Tea[] teas = { BLACK_TEA, GREEN_TEA, HERBAL_TEA };
+        Tea[] teas = {GREEN_TEA, BLACK_TEA, HERBAL_TEA};
         for (Tea tea : teas) {
-            tea.display();
-            System.out.println("Description: " + tea.getDescription());
-            System.out.println("Price: " + tea.getPrice());
+            System.out.println(tea.getName() + ": " + tea.getDescription());
+            System.out.println("Recipe: " + tea.getRecipe());
+            System.out.println();
         }
     }
 }

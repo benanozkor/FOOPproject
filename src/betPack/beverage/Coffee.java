@@ -1,19 +1,25 @@
 package betPack.beverage;
 
-public class Coffee extends Hot {
+class Coffee extends Hot {
 
-    public static final Coffee AMERICANO = new Coffee("Americano", 105, "Espresso for losers.");
-    public static final Coffee ESPRESSO = new Coffee("Espresso", 75, "Strong coffee.");
-    public static final Coffee TURKISH = new Coffee("Turkish Coffee", 90, "Ur the legend g, keep drippin'.");
-    public static final Coffee LATTE = new Coffee("Latte", 135, "Coffee with milk iste knk");
-    public static final Coffee CAPPUCCINO = new Coffee("Cappuccino", 120, "Coffee with more milk.");
-    public static final Coffee MOCHA = new Coffee("Mocha", 150, "Coffee but with chocolate.");
+    private static final Coffee[] COFFEES = {
+            new Coffee("Americano", 105, "Espresso with water", new Recipe("Espresso", "Hot water")),
+            new Coffee("Espresso", 75, "Strong coffee", new Recipe("Espresso shot")),
+            new Coffee("Turkish Coffee", 90, "Traditional Turkish coffee", new Recipe("Ground coffee", "Water", "Sugar (optional)")),
+            new Coffee("Latte", 135, "Coffee with steamed milk", new Recipe("Espresso", "Steamed milk")),
+            new Coffee("Cappuccino", 120, "Coffee with steamed and frothed milk", new Recipe("Espresso", "Steamed milk", "Foamed milk")),
+            new Coffee("Mocha", 150, "Coffee with chocolate and milk", new Recipe("Espresso", "Chocolate syrup", "Steamed milk")),
+            new Coffee("Macchiato", 110, "Espresso with a small amount of milk foam", new Recipe("Espresso", "Milk foam")),
+            new Coffee("Flat White", 140, "Steamed milk over espresso", new Recipe("Espresso", "Steamed milk"))
+    };
 
     private String description;
+    private Recipe recipe;
 
-    public Coffee(String name, double price, String description) {
+    public Coffee(String name, double price, String description, Recipe recipe) {
         super(name, price, Size.Small);
         this.description = description;
+        this.recipe = recipe;
     }
 
     @Override
@@ -21,15 +27,15 @@ public class Coffee extends Hot {
         return description;
     }
 
-    public static void displayAllCoffees() {
-        Coffee[] coffees = {AMERICANO, ESPRESSO, TURKISH, LATTE, CAPPUCCINO, MOCHA };
-        for (Coffee coffee : coffees) {
-            coffee.display();
-            System.out.println("Description: " + coffee.getDescription());
-            System.out.println("Price: " + coffee.getPrice());
-        }
+    public Recipe getRecipe() {
+        return recipe;
     }
 
-
-
+    public static void displayAllCoffees() {
+        for (Coffee coffee : COFFEES) {
+            System.out.println(coffee.getName() + ": " + coffee.getDescription());
+            System.out.println("Recipe: " + coffee.getRecipe());
+            System.out.println();
+        }
+    }
 }

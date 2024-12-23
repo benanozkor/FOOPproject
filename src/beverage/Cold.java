@@ -1,4 +1,4 @@
-package betPack.beverage;
+package beverage;
 
 public class Cold extends Beverages{
 
@@ -19,6 +19,6 @@ public class Cold extends Beverages{
 
     @Override
     public String getDescription() {
-        return isIced?"A refreshing iced " + getName() : "A cold" + getName();
+        return isIced? "A refreshing iced " + getName() : "A cold" + getName();
     }
 }

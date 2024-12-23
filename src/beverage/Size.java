@@ -1,4 +1,4 @@
-package betPack.beverage;
+package beverage;
 
 public class Size {
     private String name;
@@ -18,5 +18,17 @@ public class Size {
     @Override
     public String toString(){
         return name;
+    }
+    public double getPriceMultiplier(){
+        switch (name) {
+            case "Small":
+                return 1.0;
+            case "Medium":
+                return 1.2;
+            case "Large":
+                return 1.5;
+            default:
+                return 1.0;
+        }
     }
 }

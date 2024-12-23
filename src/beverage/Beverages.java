@@ -1,4 +1,4 @@
-package betPack.beverage;
+package beverage;
 import betPack.BetCafe;
 
 public abstract class Beverages extends BetCafe {

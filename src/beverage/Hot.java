@@ -1,4 +1,4 @@
-package betPack.beverage;
+package beverage;
 
 public class Hot extends Beverages {
 

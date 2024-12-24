@@ -11,7 +11,7 @@ public class FileManager {
         this.fileName = fileName;
     }
 
-    public void createMenuFileContent(String content) {
+    public void createFileContent(String content) {
         try (FileWriter writer = new FileWriter(fileName)){
             writer.write(content);
         }catch (IOException exception){
@@ -20,7 +20,7 @@ public class FileManager {
         }
     }
 
-    public void printMenuFileContent(){
+    public void printFileContent(){
         File file = new File(fileName);
         try(Scanner scanner = new Scanner(file)){
             System.out.println("File content");

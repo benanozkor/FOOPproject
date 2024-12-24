@@ -1,0 +1,7 @@
+     Welcome to BET cafe!  (type section NUMBER or NAME!!!)
+------------------------------------------------------------
+1. Coffee          Section
+2. Food            Section
+3. Books           Section
+------------------------------------------------------------
+

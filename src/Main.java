@@ -8,73 +8,64 @@ public class Main implements PrintOptions{
         String costumerInput;
 
         MenuManager menuManager = new MenuManager();
-
-        String booksContent = """
-                Welcome to Books section!
-                --------------------
-                1. it       - $3.00
-                2. titanic     - $3.50
-                3. flowers for el          - $4.00
-                4. bcjs            - $2.50
-                5. Sandwich       - $5.00
-                6. Cake Slice     - $4.50
-                --------------------
-                Enjoy your meal!
-                """;
-
-        String menu = """
-                Welcome to Our Cafe!
-                --------------------
-                1. Espresso       - $3.00
-                2. Cappuccino     - $3.50
-                3. Latte          - $4.00
-                4. Tea            - $2.50
-                5. Sandwich       - $5.00
-                6. Cake Slice     - $4.50
-                --------------------
-                Enjoy your meal!
-                """;
-
-        String menuFileName = "CafeMenu.txt";
-        String booksFileName = "BooksSection.txt";
+        BasketManager basketManager = new BasketManager();
 
 
         while (true) {
             try {
-                PrintOptions.welcomePrint();
+                // Creating welcome file and printing to the console
+                FileManager fileManager1 = new FileManager(welcomeFileName);
+                fileManager1.createFileContent(welcome);
+                fileManager1.printFileContent();
                 costumerInput = scanner.nextLine();
 
-                if (costumerInput.equalsIgnoreCase("books") || costumerInput.equalsIgnoreCase("1")) {
-                    // Create an instance of FileManager
+                // Checking if user choose books and if yes creating books file and print content
+                if (costumerInput.equalsIgnoreCase("books") || costumerInput.equalsIgnoreCase("3")) {
                     FileManager fileManager = new FileManager(booksFileName);
-                    // Create the file and write the menu
-                    fileManager.createMenuFileContent(booksContent);
-                    // Print the file content
-                    fileManager.printMenuFileContent();
-                } else if (costumerInput.equalsIgnoreCase("cafe") || costumerInput.equalsIgnoreCase("2")) {
-                    // Create an instance of FileManager
-                    FileManager fileManager = new FileManager(menuFileName);
-                    // Create the file and write the menu
-                    fileManager.createMenuFileContent(menu);
-                    // Print the file content
-                    fileManager.printMenuFileContent();
-                    costumerInput = scanner.nextLine();
-                    Food chosenProduct = menuManager.getProduct(costumerInput);
-                    if (chosenProduct != null) {
-                        System.out.println("You chose: " + chosenProduct.getProductName());
-                        System.out.println("Price: $" + chosenProduct.getProductPrise());
-                    } else {
-                        System.out.println("Sorry, we don't have " + chosenProduct + " on the menu.");
+                    fileManager.createFileContent(booksContent);
+                    fileManager.printFileContent();
+
+                    // Checking if user choose food and if yes creating food file and print content
+                } else if (costumerInput.equalsIgnoreCase("food") || costumerInput.equalsIgnoreCase("2")) {
+                        FileManager fileManager = new FileManager(menuFileName);
+                        fileManager.createFileContent(menu);
+                        fileManager.printFileContent();
+                    while (true) {
+                        costumerInput = scanner.nextLine();
+                        // break the while loop
+                        if (costumerInput.equalsIgnoreCase("exit")) {
+                            break;
+                            //showing basket
+                        } else if (costumerInput.equalsIgnoreCase("basket")) {
+                            basketManager.showBasket();
+                        }
+                        Food chosenProduct = null;
+                        try {
+                            // Checking if input is a number
+                            int productNumber = Integer.parseInt((costumerInput));
+                            chosenProduct = menuManager.getProductByNumber(productNumber);
+                            basketManager.addToBasket(chosenProduct);
+                            // if not number assume it is a product name
+                        } catch (NumberFormatException exception) {
+                            chosenProduct = menuManager.getProduct(costumerInput);
+                            basketManager.addToBasket(chosenProduct);
+                        }
+
                     }
+
+                    // Checking if user choose coffee and if yes creating coffee file and print content
+                } else if (costumerInput.equalsIgnoreCase("coffee") || costumerInput.equalsIgnoreCase("1")) {
+                    System.out.println("coffee");
                 }
             } catch (NullPointerException exception) {
                 System.out.println("Input can not be null! Please enter your choice" + exception.getMessage());
             } catch (Exception exception) {
                 System.out.println("Invalid value! Please enter your choice" + exception.getMessage());
             }
-
-
         }
+
+
+
     }
 
 }

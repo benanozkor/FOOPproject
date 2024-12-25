@@ -24,10 +24,16 @@ public class Main implements PrintOptions{
                     FileManager fileManager = new FileManager(booksFileName);
                     fileManager.createFileContent(booksContent);
                     fileManager.printFileContent();
+                    while (true) {
+                        costumerInput = scanner.nextLine();
+                        if (costumerInput.equalsIgnoreCase("exit")) {
+                            break;
+                    }
+
 
                     // Checking if user choose food and if yes creating food file and print content
                 } else if (costumerInput.equalsIgnoreCase("food") || costumerInput.equalsIgnoreCase("2")) {
-                        FileManager fileManager = new FileManager(menuFileName);
+                       // FileManager fileManager = new FileManager(menuFileName);
                         fileManager.createFileContent(menu);
                         fileManager.printFileContent();
                     while (true) {

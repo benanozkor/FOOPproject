@@ -1,15 +1,19 @@
 public interface PrintOptions {
 
     String booksContent = """
-                              Welcome to Books section!
-                --------------------------------------------------
-                1. it       - $3.00
-                2. titanic     - $3.50
-                3. flowers for el          - $4.00
-                4. Drakula            - $2.50
-                5. Geometry       - $5.00
-                6. fuck you     - $4.50
-                -------------------------------------------------
+                              Welcome to Books section! (to go to the genres type section NAME or Number)
+                ----------------------------------------------------------------------------------------------------
+                1. Classics
+                2. Crime
+                3. Drama         
+                4. Fantasy
+                5. History
+                6. Mango
+                7. Philosophy
+                8. Romance
+                9. Thriller
+                10.Young Adult
+                ---------------------------------------------------------------------------------------------------
                 
                 """;
 

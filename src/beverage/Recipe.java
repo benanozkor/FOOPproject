@@ -1,6 +1,6 @@
 package beverage;
 
-import betPack.Inventory; // Make sure this is the correct package for your Inventory class. Remove if Inventory is in the same package.
+import betPack.Inventory;
 import java.util.Map;
 
 public class Recipe {

@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class Inventory {
 
-    private Map<String, Double> ingredients;
+    private static Map<String, Double> ingredients;
     private Map<String, Double> ingredientPrices;
     private Map<String, Integer> cups;
     private Map<String, Double> cupPrices;
@@ -115,7 +115,7 @@ public class Inventory {
         ingredients.put(name, ingredients.getOrDefault(name, 0.0) + amount);
     }
 
-    public void removeIngredient(String name, double amount) {
+    public static boolean removeIngredient(String name, double amount) {
         if (ingredients.containsKey(name)) {
             double currentAmount = ingredients.get(name);
             if (currentAmount >= amount) {
@@ -126,6 +126,7 @@ public class Inventory {
         } else {
             System.out.println(name + " is not in the inventory.");
         }
+        return false;
     }
 
     public double getIngredientAmount(String name) {

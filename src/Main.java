@@ -2,6 +2,7 @@ import books.Book;
 import books.Classics;
 import food.*;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main implements PrintOptions{
@@ -22,7 +23,8 @@ public class Main implements PrintOptions{
                 FileManager fileManager1 = new FileManager(welcomeFileName);
                 fileManager1.createFileContent(welcome);
                 fileManager1.printFileContent();
-                costumerInput = scanner.nextLine();
+                costumerInput = scanner.nextLine().trim();
+                if (costumerInput.equalsIgnoreCase("exit")) break;
 
 
                 // Checking if user choose books and if yes creating books file and print content
@@ -30,23 +32,24 @@ public class Main implements PrintOptions{
                     FileManager fileManager = new FileManager(booksFileName);
                     fileManager.createFileContent(booksContent);
                     fileManager.printFileContent();
-                    while (true) {  //doesnt work
+                    while (true) {
                         costumerInput = scanner.nextLine().trim();
                         if (costumerInput.equalsIgnoreCase("exit")) break;
-                        Book chosenBook = null;
-                        if (true) {
-                            booksManager.booksBySection(costumerInput);
+                        else if (costumerInput.equalsIgnoreCase("basket")) {
+                            booksBasketManager.showBooksBasket();
+                        }else {
+                            Book chosenBook;
+                            try {
+                                int sectionNumber = Integer.parseInt(costumerInput);
+                                booksManager.booksBySection(String.valueOf(sectionNumber));
+                            } catch (NumberFormatException exception) {
+                                chosenBook = booksManager.getBook(costumerInput);
+                                booksBasketManager.addToBooksBasket(chosenBook);
+                            } catch (NullPointerException exception) {
+                                System.out.println("Invalid value! Please try again.");
+                            }
                         }
-                            chosenBook = booksManager.getBook(costumerInput);
-                        booksBasketManager.addToBooksBasket(chosenBook);
-
                     }
-
-
-
-
-
-
                     // Checking if user choose food and if yes creating food file and print content
                 } else if (costumerInput.equalsIgnoreCase("food") || costumerInput.equalsIgnoreCase("2")) {
                         FileManager fileManager = new FileManager(menuFileName);
@@ -80,9 +83,9 @@ public class Main implements PrintOptions{
                     System.out.println("coffee");
                 }
             } catch (NullPointerException exception) {
-                System.out.println("Input can not be null! Please enter your choice" + exception.getMessage());
+                System.out.println("Input can not be null! Please enter your choice. " + exception.getMessage());
             } catch (Exception exception) {
-                System.out.println("Invalid value! Please enter your choice" + exception.getMessage());
+                System.out.println("Invalid value! Please enter your choice. " + exception.getMessage());
             }
         }
 

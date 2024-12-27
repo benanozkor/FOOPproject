@@ -3,16 +3,22 @@ import betCafepackage.BetCafe;
 public abstract class Book extends BetCafe {
 
 
-    //private String title;
+    private String title;
     private String author;
     private String bookDescription;
-    private String price;
+    private double price;
+    private int quantity;
 
+    public Book(){
 
-    public Book(String author, String bookDescription, String price) {
+    }
+
+    public Book(String title, String author, String bookDescription, double price, int quantity) {
+        this.title = title;
         this.author = author;
         this.bookDescription = bookDescription;
         this.price = price;
+        this.quantity = quantity;
 
     }
 
@@ -33,16 +39,31 @@ public abstract class Book extends BetCafe {
         this.bookDescription = bookDescription;
     }
 
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
     public abstract String genreDescription();
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 }
 
 

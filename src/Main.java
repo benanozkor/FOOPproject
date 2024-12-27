@@ -1,3 +1,5 @@
+import books.Book;
+import books.Classics;
 import food.*;
 
 import java.util.Scanner;
@@ -9,6 +11,9 @@ public class Main implements PrintOptions{
 
         MenuManager menuManager = new MenuManager();
         BasketManager basketManager = new BasketManager();
+        BooksManager booksManager = new BooksManager();
+        BooksBasketManager booksBasketManager = new BooksBasketManager();
+
 
 
         while (true) {
@@ -19,21 +24,32 @@ public class Main implements PrintOptions{
                 fileManager1.printFileContent();
                 costumerInput = scanner.nextLine();
 
+
                 // Checking if user choose books and if yes creating books file and print content
                 if (costumerInput.equalsIgnoreCase("books") || costumerInput.equalsIgnoreCase("3")) {
                     FileManager fileManager = new FileManager(booksFileName);
                     fileManager.createFileContent(booksContent);
                     fileManager.printFileContent();
-                    while (true) {
-                        costumerInput = scanner.nextLine();
-                        if (costumerInput.equalsIgnoreCase("exit")) {
-                            break;
+                    while (true) {  //doesnt work
+                        costumerInput = scanner.nextLine().trim();
+                        if (costumerInput.equalsIgnoreCase("exit")) break;
+                        Book chosenBook = null;
+                        if (true) {
+                            booksManager.booksBySection(costumerInput);
+                        }
+                            chosenBook = booksManager.getBook(costumerInput);
+                        booksBasketManager.addToBooksBasket(chosenBook);
+
                     }
+
+
+
+
 
 
                     // Checking if user choose food and if yes creating food file and print content
                 } else if (costumerInput.equalsIgnoreCase("food") || costumerInput.equalsIgnoreCase("2")) {
-                       // FileManager fileManager = new FileManager(menuFileName);
+                        FileManager fileManager = new FileManager(menuFileName);
                         fileManager.createFileContent(menu);
                         fileManager.printFileContent();
                     while (true) {

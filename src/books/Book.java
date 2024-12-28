@@ -1,6 +1,9 @@
 package books;
 import betCafepackage.BetCafe;
-public abstract class Book extends BetCafe {
+
+import java.io.Serializable;
+
+public abstract class Book extends BetCafe implements Serializable {
 
 
     private String title;
@@ -23,6 +26,10 @@ public abstract class Book extends BetCafe {
     }
 
 
+    @Override
+    public String toString(){
+        return title + " by " + author + price + " TL. ";
+    }
     public String getAuthor() {
         return author;
     }

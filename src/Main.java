@@ -35,9 +35,24 @@ public class Main implements PrintOptions{
                     while (true) {
                         costumerInput = scanner.nextLine().trim();
                         if (costumerInput.equalsIgnoreCase("exit")) break;
+
                         else if (costumerInput.equalsIgnoreCase("basket")) {
-                            booksBasketManager.showBooksBasket();
-                        }else {
+                            while (true) {
+                                booksBasketManager.showBooksBasket();
+                                costumerInput = scanner.nextLine().trim();
+                                //booksBasketManager.removeBookBasket(booksBasketManager.getBookBasket(costumerInput));
+                                if (costumerInput.equalsIgnoreCase("payment")){
+                                    while (true) {
+                                        System.out.println("Your total is: " + booksBasketManager.calculateTotal() + " Please type exact total to make payment!");
+                                        costumerInput = String.valueOf(scanner.nextDouble());
+                                        booksBasketManager.makePayment(Double.parseDouble(costumerInput), booksBasketManager.calculateTotal());
+
+                                    }
+
+                                }
+                            }
+
+                        } else {
                             Book chosenBook;
                             try {
                                 int sectionNumber = Integer.parseInt(costumerInput);
@@ -45,12 +60,11 @@ public class Main implements PrintOptions{
                             } catch (NumberFormatException exception) {
                                 chosenBook = booksManager.getBook(costumerInput);
                                 booksBasketManager.addToBooksBasket(chosenBook);
-                            } catch (NullPointerException exception) {
-                                System.out.println("Invalid value! Please try again.");
                             }
                         }
                     }
                     // Checking if user choose food and if yes creating food file and print content
+
                 } else if (costumerInput.equalsIgnoreCase("food") || costumerInput.equalsIgnoreCase("2")) {
                         FileManager fileManager = new FileManager(menuFileName);
                         fileManager.createFileContent(menu);

@@ -10,6 +10,10 @@ public class Fantasy extends Book {
     }
 
     @Override
+    public String toString(){
+        return super.getTitle() + " by " + super.getAuthor() + super.getPrice() + " TL. ";
+    }
+    @Override
     public String genreDescription(){
         return "Fantasy fiction is a genre of fiction that involves elements that cannot exist within the real world. This fictional universe includes things like magic, mythology, or life from other worlds or universes.";
     }

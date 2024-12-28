@@ -11,6 +11,10 @@ public class Classics extends Book {
     public Classics() {
 
     }
+    @Override
+    public String toString(){
+        return super.getTitle() + " by " + super.getAuthor() + super.getPrice() + " TL. ";
+    }
 
     public Classics(String title, String author, String bookDescription, double price, int quantity) {
         super(title,author, bookDescription, price, quantity);

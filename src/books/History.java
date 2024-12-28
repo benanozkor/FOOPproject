@@ -10,6 +10,10 @@ public class History extends Book {
     }
 
     @Override
+    public String toString(){
+        return super.getTitle() + " by " + super.getAuthor() + super.getPrice() + " TL. ";
+    }
+    @Override
     public String genreDescription(){
         return "History genre consists of events of significant change that happened in the past and the discovery, collection, presentation, and organization of the information";
     }

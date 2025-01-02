@@ -40,9 +40,4 @@ public class IcedCoffee extends Cold {
             System.out.println(icedCoffee.getName() + ": " + icedCoffee.getDescription());
         }
     }
-
-
-    public static IcedCoffee getIcedCoffeeByName(String name) {
-        return ICED_COFFEE_MAP.get(name.toLowerCase());
-    }
 }

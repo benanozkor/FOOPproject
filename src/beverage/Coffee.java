@@ -32,8 +32,6 @@ public class Coffee extends Hot {
     public static void displayAllCoffees() {
         for (Coffee coffee : COFFEES) {
             System.out.println(coffee.getName() + ": " + coffee.getDescription());
-            System.out.println("Recipe:");
-
             System.out.println();
         }
     }

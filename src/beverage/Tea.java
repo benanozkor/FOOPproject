@@ -29,18 +29,8 @@ public class Tea extends Hot {
     public static void displayAllTeas() {
         for (Tea tea : TEAS) {
             System.out.println(tea.getName() + ": " + tea.getDescription());
-            System.out.println("Recipe:");
             System.out.println();
         }
-    }
-
-    public static Tea getTeaByName(String name) {
-        for (Tea tea : TEAS) {
-            if (tea.getName().equalsIgnoreCase(name)) {
-                return tea;
-            }
-        }
-        return null;
     }
 
 }

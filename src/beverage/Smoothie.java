@@ -28,7 +28,6 @@ public class Smoothie extends Cold {
     public static void displayAllSmoothies() {
         for (Smoothie smoothie : SMOOTHIES) {
             System.out.println(smoothie.getName() + ": " + smoothie.getDescription());
-            System.out.println("Recipe:");
             System.out.println();
         }
     }

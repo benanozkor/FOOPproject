@@ -28,7 +28,6 @@ public class IcedTea extends Cold {
     public static void displayAllIcedTeas() {
         for (IcedTea icedTea : ICED_TEAS) {
             System.out.println(icedTea.getName() + ": " + icedTea.getDescription());
-            System.out.println("Recipe:");
             System.out.println();
         }
     }

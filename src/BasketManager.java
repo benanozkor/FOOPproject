@@ -1,5 +1,3 @@
-import food.Food;
-
 import java.util.HashMap;
 
 public class BasketManager {

@@ -1,7 +1,8 @@
 package beverage;
 import betPack.BetCafe;
+import betPack.CafeItem;
 
-public abstract class Beverages extends BetCafe {
+public abstract class Beverages extends CafeItem {
     private String name;
     private double price;
     private Size size;

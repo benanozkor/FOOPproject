@@ -2,6 +2,13 @@ import food.Desserts;
 import food.Food;
 import food.Salty;
 import beverage.Beverages;
+import beverage.Hot;
+import beverage.Cold;
+import beverage.Coffee;
+import beverage.IcedCoffee;
+import beverage.IcedTea;
+import beverage.Tea;
+import beverage.Smoothie;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,7 +16,6 @@ import java.util.HashMap;
 public class MenuManager {
     private HashMap<String, Food> menu;
     private ArrayList<String> orderedNames; //List to map to food names
-
     public MenuManager(){
         menu = new HashMap<>();
         orderedNames = new ArrayList<>();
@@ -34,6 +40,22 @@ public class MenuManager {
         addMenuItem( new Salty("Cheese Borek",70,345,"Salty",false,"cheese"));
         addMenuItem( new Salty("Meat Borek",100,436,"Salty",false,"chicken"));
         addMenuItem( new Salty("Potato Borek",70,336,"Salty",true,"potato"));
+
+        for (Coffee coffee : Coffee.COFFEES) {
+            addMenuItem(coffee);
+        }
+        for (IcedCoffee icedCoffee : IcedCoffee.ICED_COFFEES) {
+            addMenuItem(icedCoffee);
+        }
+        for (Tea tea : Tea.TEAS) {
+            addMenuItem(tea);
+        }
+        for (IcedTea icedTea : IcedTea.ICED_TEAS){
+            addMenuItem(icedTea);
+        }
+        for (Smoothie smoothie : Smoothie.SMOOTHIES) {
+            addMenuItem(Smoothie);
+        }
     }
     private void addMenuItem(Food food) {
         menu.put(food.getProductName(), food);

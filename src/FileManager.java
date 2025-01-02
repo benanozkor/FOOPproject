@@ -1,3 +1,4 @@
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -29,6 +30,6 @@ public class FileManager {
         }catch (IOException exception) {
             System.out.println("Error while reading file");
             exception.printStackTrace();
-        }
+        }// !!!!! use clean in finally block
     }
 }

@@ -1,8 +1,8 @@
 package food;
-
+import betPack.CafeItem;
 import betPack.BetCafe;
 
-public abstract class Food extends BetCafe {
+public abstract class Food extends CafeItem {
 
     private String productName;
     private double productPrise;
@@ -71,6 +71,4 @@ public abstract class Food extends BetCafe {
     public void setFoodContent(String foodContent) {
         this.foodContent = foodContent;
     }
-
-    public abstract void welcome();
 }

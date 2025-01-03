@@ -12,11 +12,4 @@ public class Desserts extends Food {
     public Desserts(){}
 
 
-
-    @Override
-    public void welcome(){
-        System.out.println("Welcome to Bet Cafe");
-    }
-
-
 }

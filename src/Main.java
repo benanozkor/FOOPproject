@@ -1,3 +1,4 @@
+import beverage.Beverage;
 import books.Book;
 import books.Classics;
 import food.*;
@@ -14,6 +15,7 @@ public class Main implements PrintOptions{
         BasketManager basketManager = new BasketManager();
         BooksManager booksManager = new BooksManager();
         BooksBasketManager booksBasketManager = new BooksBasketManager();
+        BeverageMenuManager beverageMenuManager = new BeverageMenuManager();
 
 
 
@@ -94,7 +96,20 @@ public class Main implements PrintOptions{
 
                     // Checking if user choose coffee and if yes creating coffee file and print content
                 } else if (costumerInput.equalsIgnoreCase("coffee") || costumerInput.equalsIgnoreCase("1")) {
-                    System.out.println("coffee");
+                    FileManager fileManager = new FileManager(coffeeMenuName);
+                    fileManager.createFileContent(coffeeMenu);
+                    fileManager.printFileContent();
+                    costumerInput = scanner.nextLine();
+                    Beverage chosenBeverage = null;
+                    chosenBeverage =  beverageMenuManager.getBeverage(costumerInput);
+                    basketManager.addBeverageToBasket(chosenBeverage);
+                    costumerInput = scanner.nextLine().trim().toLowerCase();
+                    beverageMenuManager.chooseSize(costumerInput,chosenBeverage);
+                    System.out.println(chosenBeverage.getPrice());
+                    costumerInput = scanner.nextLine();
+                    if (costumerInput.equalsIgnoreCase("basket")){
+                        basketManager.showBasket();
+                    }
                 }
             } catch (NullPointerException exception) {
                 System.out.println("Input can not be null! Please enter your choice. " + exception.getMessage());

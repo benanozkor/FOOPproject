@@ -7,8 +7,6 @@ public class Salty extends Food {
         super(productName,productPrise,calories,foodType,forVegans,foodContent);
     }
 
-    @Override
-    public void welcome(){
-        System.out.println("Welcome to Bet Cafe");
-    }
+
+
 }

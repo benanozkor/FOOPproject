@@ -4,8 +4,12 @@ import beverage.Beverage;
 
 public class Hot extends Beverage {
 
+    public Hot(String name, double price, Size size, boolean b) {
+        super(name, price, size);
+    }
+
     @Override
-    public void welcome(){
-        System.out.println("Welcome to Bet Cafe");
+    public String getDescription() {
+        return "A hot " + getName();
     }
 }

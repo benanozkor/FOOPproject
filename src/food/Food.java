@@ -1,11 +1,9 @@
 package food;
 
 import betCafepackage.BetCafe;
+import betCafepackage.CafeItem;
 
-public abstract class Food extends BetCafe {
-
-    private String productName;
-    private double productPrise;
+public abstract class Food extends CafeItem {
     private int calories;
     private String foodType;
     private boolean forVegans;
@@ -15,9 +13,8 @@ public abstract class Food extends BetCafe {
     public Food(){
 
     }
-    public Food(String productName, double productPrise, int calories, String foodType, boolean forVegans, String foodContent){
-        this.productName = productName;
-        this.productPrise = productPrise;
+    public Food(String productName, double price, int calories, String foodType, boolean forVegans, String foodContent){
+        super(productName,price);
         this.calories= calories;
         this.foodType = foodType;
         this.forVegans = forVegans;
@@ -48,21 +45,6 @@ public abstract class Food extends BetCafe {
         this.forVegans = forVegans;
     }
 
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public double getProductPrise() {
-        return productPrise;
-    }
-
-    public void setProductPrise(double productPrise) {
-        this.productPrise = productPrise;
-    }
 
     public String getFoodContent() {
         return foodContent;

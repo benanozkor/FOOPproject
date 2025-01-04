@@ -29,7 +29,7 @@ public class BooksBasketManager {
         System.out.println("The book with the title '" + title + "' is not in the basket.");
         return null;
     }
-    public double calculateTotal(){
+    public double calculateTotalBooks(){
         double total = 0.0;
         for (Book book : booksBasket.keySet()){
             total += book.getPrice() * booksBasket.get(book);
@@ -37,16 +37,17 @@ public class BooksBasketManager {
         return total;
     }
 
-    public void makePayment (double payment, double total){
+    public void makePaymentBooks(double payment, double total){
         if (payment < total){
             System.out.println("Insufficient funds! Please type total.");
         } else if (payment > total) {
-            System.out.println("Payment successful! Your money back : " + (payment - total));
+            System.out.println("Payment successful! Your money back: " + String.format("%.2f", (payment - total)));
         } else if (total == 0.0){
             System.out.println("Your basket is empty!");
         } else if (total == payment) {
             System.out.println("Payment successful!");
         }
+
     }
     public void removeBookBasket(Book book) {
         booksBasket.remove(book,booksBasket.get(book) + 1);

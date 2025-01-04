@@ -1,9 +1,8 @@
+import betCafepackage.CafeItem;
 import beverage.Beverage;
 import books.Book;
-import books.Classics;
 import food.*;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Main implements PrintOptions{
@@ -45,10 +44,9 @@ public class Main implements PrintOptions{
                                 //booksBasketManager.removeBookBasket(booksBasketManager.getBookBasket(costumerInput));
                                 if (costumerInput.equalsIgnoreCase("payment")){
                                     while (true) {
-                                        System.out.println("Your total is: " + booksBasketManager.calculateTotal() + " Please type exact total to make payment!");
+                                        System.out.println("Your total is: " + booksBasketManager.calculateTotalBooks() + " Please type exact total to make payment!");
                                         costumerInput = String.valueOf(scanner.nextDouble());
-                                        booksBasketManager.makePayment(Double.parseDouble(costumerInput), booksBasketManager.calculateTotal());
-
+                                        booksBasketManager.makePaymentBooks(Double.parseDouble(costumerInput), booksBasketManager.calculateTotalBooks());
                                     }
 
                                 }
@@ -99,17 +97,36 @@ public class Main implements PrintOptions{
                     FileManager fileManager = new FileManager(coffeeMenuName);
                     fileManager.createFileContent(coffeeMenu);
                     fileManager.printFileContent();
-                    costumerInput = scanner.nextLine();
-                    Beverage chosenBeverage = null;
-                    chosenBeverage =  beverageMenuManager.getBeverage(costumerInput);
-                    basketManager.addBeverageToBasket(chosenBeverage);
                     costumerInput = scanner.nextLine().trim().toLowerCase();
-                    beverageMenuManager.chooseSize(costumerInput,chosenBeverage);
-                    System.out.println(chosenBeverage.getPrice());
-                    costumerInput = scanner.nextLine();
-                    if (costumerInput.equalsIgnoreCase("basket")){
-                        basketManager.showBasket();
+                    while (true) {
+                        Beverage choosenBeverage = null;
+                        try {
+                            // Checking if input is a number
+                            int productNumber = Integer.parseInt((costumerInput));
+                            choosenBeverage = beverageMenuManager.getBeverageByNumber(productNumber);
+                            basketManager.addBeverageToBasket(choosenBeverage);
+                            // if not number assume it is a product name
+                        } catch (NumberFormatException exception) {
+                            choosenBeverage = beverageMenuManager.getBeverage(costumerInput);
+                            basketManager.addBeverageToBasket(choosenBeverage);
+                        }
+                        costumerInput = scanner.nextLine().trim().toLowerCase();
+                        beverageMenuManager.chooseSize(costumerInput,choosenBeverage);
+                        System.out.println(choosenBeverage.getProductName() + " " + choosenBeverage.getPrice());
+                        costumerInput = scanner.nextLine();
+                        if (costumerInput.equalsIgnoreCase("back")){
+                            break;
+                        }
+                        if (costumerInput.equalsIgnoreCase("basket")){
+                            basketManager.showBasket();
+                        }
+
+
+
+
+
                     }
+
                 }
             } catch (NullPointerException exception) {
                 System.out.println("Input can not be null! Please enter your choice. " + exception.getMessage());
@@ -119,7 +136,7 @@ public class Main implements PrintOptions{
         }
 
 
-
     }
+
 
 }

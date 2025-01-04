@@ -22,12 +22,14 @@ public class BasketManager {
     }
 
     public void addBeverageToBasket(Beverage beverage){
-        if (beverage == null) {
+        if (beverage != null) {
+            basket.put(beverage, basket.getOrDefault(beverage, 0) + 1);
+            System.out.println(beverage.getName() + " added to the basket");
+            System.out.println("Choose size of your beverage: Small, Medium, Large");
+        } else {
             System.out.println("The selected product is not available in the menu. ");
-            return;
+
         }
-        basket.put(beverage, basket.getOrDefault(beverage,0) + 1);
-        System.out.println(beverage.getName() + " added to the basket");
     }
 
 
@@ -45,8 +47,40 @@ public class BasketManager {
 
     public void removeItemBasket(CafeItem cafeItem){
         basket.remove(cafeItem,basket.get(cafeItem)+1);
-        System.out.println(basket.get(cafeItem) + "is removed from the basket.");
+        System.out.println(basket.get(cafeItem.getProductName()) + "is removed from the basket.");
     }
+
+    public CafeItem getItemFromBasket(String name){
+        for (CafeItem cafeItem : basket.keySet()){
+            if (cafeItem.getProductName().equalsIgnoreCase(name)){
+                return cafeItem;
+            }
+        }
+        System.out.println("Product not found in basket");
+        return null;
+    }
+
+    public double calculateTotalCafe(){
+        double total = 0.0;
+        for (CafeItem cafeItem : basket.keySet()){
+            total += cafeItem.getPrice() * basket.get(cafeItem);
+        }
+        return total;
+    }
+
+    public void makePayment(double payment, double total){
+        if (payment < total){
+            System.out.println("Insufficient funds! Please type total.");
+        } else if (payment > total) {
+            System.out.println("Payment successful! Your money back : " + (payment - total));
+        } else if (total == 0.0){
+            System.out.println("Your basket is empty!");
+        } else if (total == payment) {
+            System.out.println("Payment successful!");
+        }
+    }
+
+
 
 
 }

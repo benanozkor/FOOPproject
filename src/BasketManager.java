@@ -157,6 +157,30 @@ public class BasketManager {
                     ", Total Price: TL" + String.format("%.2f", food.calculateTotalPrice()));
             itemNumber++;
         }
-        System.out.println("Type 'remove' to delete an item, or 'back' to return to the previous menu.");
+        System.out.println("Type 'remove' to delete an item, 'payment' to proceed to payment, or 'back' to return to the previous menu.");
+    }
+
+    // Calculate the total price of all items in the basket (both food and beverages)
+    public double calculateTotalPrice() {
+        double totalPrice = 0;
+
+        // Calculate total price for beverages
+        for (Beverage beverage : beverageBasket.values()) {
+            totalPrice += beverage.calculateTotalPrice();  // Assuming each beverage has a method to calculate its price
+        }
+
+        // Calculate total price for food
+        for (Food food : foodBasket.values()) {
+            totalPrice += food.calculateTotalPrice();  // Assuming each food has a method to calculate its price
+        }
+
+        return totalPrice;
+    }
+
+    // Clears the basket by removing all items
+    public void clearBasket() {
+        beverageBasket.clear();
+        foodBasket.clear();
+        System.out.println("Basket has been cleared.");
     }
 }

@@ -50,6 +50,23 @@ public class Main implements PrintOptions {
         }
     }
 
+    private static void handlePayment(Scanner scanner, BasketManager basketManager) {
+        double total = basketManager.calculateTotalPrice();
+        System.out.println("Total Price: " + total);
+
+        System.out.println("Enter payment amount (TL):");
+        double paymentAmount = scanner.nextDouble();
+        scanner.nextLine(); // Consume the newline character
+
+        if (paymentAmount >= total) {
+            double change = paymentAmount - total;
+            System.out.println("Payment successful! Your change is TL" + change);
+            basketManager.clearBasket();
+        } else {
+            System.out.println("Insufficient funds. Please enter a valid amount.");
+        }
+    }
+
     private static void handleBooksSection(Scanner scanner, BooksManager booksManager, BooksBasketManager booksBasketManager) {
         String costumerInput = "";  // Varsayılan olarak boş string atanıyor.
         while (true) {
@@ -86,8 +103,8 @@ public class Main implements PrintOptions {
                 boolean exitLoop = false;
 
                 while (!exitLoop) {
-                    // Display this prompt only once after showing the basket
-                    System.out.println("Type 'remove' to delete an item, or 'back' to return to the previous menu.");
+                    // Display this prompt with the payment option after showing the basket
+                    System.out.println("Type 'remove' to delete an item, 'payment' to proceed to payment, or 'back' to return to the previous menu.");
                     String action = scanner.nextLine().trim().toLowerCase();
 
                     if (action.equals("remove")) {
@@ -110,10 +127,14 @@ public class Main implements PrintOptions {
                         } else {
                             System.out.println("Invalid input format. Correct format: 'itemNumber quantity'. Example: '3 1'");
                         }
+                    } else if (action.equals("payment")) {
+                        // Proceed to payment if the user chooses 'payment'
+                        handlePayment(scanner, basketManager);
+                        exitLoop = true;  // Exit the loop after payment
                     } else if (action.equals("back")) {
                         exitLoop = true;  // Exit the loop and return to the previous menu
                     } else {
-                        System.out.println("Invalid command. Please enter 'remove' or 'back'.");
+                        System.out.println("Invalid command. Please enter 'remove', 'payment', or 'back'.");
                     }
                 }
             } else {
@@ -129,6 +150,8 @@ public class Main implements PrintOptions {
         }
     }
 
+
+
     private static void handleBeverageSection(Scanner scanner, BeverageMenuManager beverageMenuManager, BasketManager basketManager) {
         String costumerInput = "";  // Varsayılan olarak boş string atanıyor.
         while (true) {
@@ -140,8 +163,8 @@ public class Main implements PrintOptions {
                 boolean exitLoop = false;
 
                 while (!exitLoop) {
-                    // Display this prompt only once after showing the basket
-                    System.out.println("Type 'remove' to delete an item, or 'back' to return to the previous menu.");
+                    // Display the prompt with the 'payment' option
+                    System.out.println("Type 'remove' to delete an item, 'payment' to proceed to payment, or 'back' to return to the previous menu.");
                     String action = scanner.nextLine().trim().toLowerCase();
 
                     if (action.equals("remove")) {
@@ -164,10 +187,14 @@ public class Main implements PrintOptions {
                         } else {
                             System.out.println("Invalid input format. Correct format: 'itemNumber quantity'. Example: '3 1'");
                         }
+                    } else if (action.equals("payment")) {
+                        // Proceed to payment if the user chooses 'payment'
+                        handlePayment(scanner, basketManager);
+                        exitLoop = true;  // Exit the loop after payment
                     } else if (action.equals("back")) {
                         exitLoop = true;  // Exit the loop and return to the previous menu
                     } else {
-                        System.out.println("Invalid command. Please enter 'remove' or 'back'.");
+                        System.out.println("Invalid command. Please enter 'remove', 'payment', or 'back'.");
                     }
                 }
             } else {

@@ -8,7 +8,7 @@ public interface PrintOptions {
                 3. Drama         
                 4. Fantasy
                 5. History
-                6. Mango
+                6. Manga
                 7. Philosophy
                 8. Romance
                 9. Thriller
@@ -49,14 +49,14 @@ public interface PrintOptions {
                      Welcome to BET cafe!  (type section NUMBER or NAME!!!)
                 ------------------------------------------------------------
                 1. Beverage          Section
-                2. Food            Section
-                3. Books           Section   
+                2. Food              Section
+                3. Books             Section   
                 ------------------------------------------------------------
                 
                 """;
 
     String beveragesMenu = """
-             Welcome to Food Section!   (to add product to basket enter it's NUMBER or NAME!!!)
+             Welcome to Beverage Section!   (to add product to basket enter it's NUMBER or NAME!!!)
                 -------------------------------------------------------------------------------------------
                                  Hot                                                 Cold
                 ----------------------------------------           ----------------------------------------
@@ -65,28 +65,25 @@ public interface PrintOptions {
                 1. Americano                    - 105 TL           14. Iced Latte                  - 130 TL
                 2. Espresso                     - 75 TL            15. Iced Mocha                  - 140 TL
                 3. Turkish Coffee               - 90 TL            16. Iced Americano              - 120 TL
-                4.Latte                         - 135 TL           17. Caramel Frappuccino         - 160 TL
-                5.Cappuccino                    - 120 TL           18. Vanilla Iced Coffee         - 135 TL
-                6.Mocha                         - 150 TL           ----------------------------------------
-                7.Macchiato                     - 110 TL           Iced Teas
-                8.Flat White                    - 140 TL           ----------------------------------------
+                4. Latte                         - 135 TL          17. Caramel Frappuccino         - 160 TL
+                5. Cappuccino                    - 120 TL          18. Vanilla Iced Coffee         - 135 TL
+                6. Mocha                         - 150 TL           ----------------------------------------
+                7. Macchiato                     - 110 TL           Iced Teas
+                8. Flat White                    - 140 TL           ----------------------------------------
                 ----------------------------------------           19. Lemon Iced Tea              - 80 TL
                 Teas                                               20. Peach Iced Tea              - 85 TL
                 ----------------------------------------           21. Mint Iced Tea               - 90 TL
-                9. Earl Grey                     - 50 TL           22. Berry Iced Tea              - 95 TL
+                9.  Earl Grey                     - 50 TL          22. Berry Iced Tea              - 95 TL
                 10. Green Tea                    - 45 TL           23. Hibiscus Iced Tea           - 100 TL
                 11. Chamomile Tea                - 55 TL           ----------------------------------------
                 12. Peppermint Tea               - 50 TL           Smoothies
                 13. Jasmine Tea                  - 60 TL           ----------------------------------------
                 ----------------------------------------           24. Strawberry Smoothie         - 120 TL
-                Add On                                             25. Mango Smoothie              - 130 TL
-                ----------------------------------------           26. Blueberry Smoothie          - 125 TL
-                Extra Cream                      - 15 TL           27. Banana Smoothie             - 110 TL
-                Caramel Syrup                    - 20 TL           28. Green Smoothie              - 135 TL
-                Extra Espresso Shot              - 25 TL
-                Vanilla Syrup                    - 20 TL
-                Honey                            - 10 TL
-                Cinnamon                         - 5 TL
+                                                                   25. Mango Smoothie              - 130 TL
+                                                                   26. Blueberry Smoothie          - 125 TL
+                                                                   27. Banana Smoothie             - 110 TL
+                                                                   28. Green Smoothie              - 135 TL
+           
                 -------------------------------------------------------------------------------------------
                 """;
 

@@ -2,7 +2,7 @@ import java.util.Scanner;
 import beverage.*;
 import food.*;
 import books.*;
-import java.util.Arrays;
+import managers.*;
 
 public class Main implements PrintOptions {
     public static void main(String[] args) {
@@ -72,22 +72,34 @@ public class Main implements PrintOptions {
         while (true) {
             costumerInput = scanner.nextLine().trim();
             if (costumerInput.equalsIgnoreCase("exit")) break;
-            if (costumerInput.equalsIgnoreCase("menu") || costumerInput.equalsIgnoreCase("back")) return;
+            if (costumerInput.equalsIgnoreCase("menu")) return;
             if (costumerInput.equalsIgnoreCase("basket")) {
                 booksBasketManager.showBooksBasket();
-                System.out.println("Type 'back' to return to menu or continue to add items.");
-                String nextAction = scanner.nextLine().trim().toLowerCase();
-                if (nextAction.equals("back")) {
-                    break;
+                while (true) {
+                    System.out.println("Type 'remove' to delete an item, 'payment' to proceed to payment, or 'back' to return to the previous menu.");
+                    String nextAction = scanner.nextLine().trim().toLowerCase();
+                    if (nextAction.equals("back")) break;
+                    if (nextAction.equals("remove")) {
+                        System.out.println("Type title of book to remove from your basket");
+                        nextAction = scanner.nextLine().trim();
+                        Book bookToRemove = booksBasketManager.getBookBasket(nextAction);
+                        booksBasketManager.removeBookBasket(bookToRemove);
+                    }
+                    if (nextAction.equals("payment")) {
+                        System.out.println("Your total is " + booksBasketManager.calculateTotalBooks() + "TL. Please type sum to make payment.");
+                        nextAction = scanner.nextLine().trim();
+                        booksBasketManager.makePaymentBooks(Double.parseDouble(nextAction), booksBasketManager.calculateTotalBooks());
+                        break;
+                    }
                 }
-            } else {
-                try {
-                    int sectionNumber = Integer.parseInt(costumerInput);
-                    booksManager.booksBySection(String.valueOf(sectionNumber));
-                } catch (NumberFormatException exception) {
-                    Book chosenBook = booksManager.getBook(costumerInput);
-                    booksBasketManager.addToBooksBasket(chosenBook);
-                }
+
+            }
+            try {
+                int sectionNumber = Integer.parseInt(costumerInput);
+                booksManager.booksBySection(String.valueOf(sectionNumber));
+            } catch (NumberFormatException exception) {
+                Book chosenBook = booksManager.getBook(costumerInput);
+                booksBasketManager.addToBooksBasket(chosenBook);
             }
         }
     }

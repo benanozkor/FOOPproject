@@ -1,3 +1,5 @@
+package managers;
+
 import books.*;
 
 import java.util.ArrayList;
@@ -125,7 +127,7 @@ public class BooksManager {
         }
     }
 
-    void booksBySection(String section) {
+    public void booksBySection(String section) {
         section = section.toLowerCase();
         switch (section){
             case "1":

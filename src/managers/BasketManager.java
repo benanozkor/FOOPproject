@@ -1,3 +1,5 @@
+package managers;
+
 import betCafepackage.BetCafe;
 import betCafepackage.CafeItem;
 import beverage.Beverage;

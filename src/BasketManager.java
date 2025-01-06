@@ -1,86 +1,162 @@
+import betCafepackage.BetCafe;
 import betCafepackage.CafeItem;
 import beverage.Beverage;
 import food.Food;
-
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Arrays;
 
 public class BasketManager {
-    private final HashMap<CafeItem, Integer> basket;
+    private final Map<String, Beverage> beverageBasket;  // İçecekler için ayrı bir basket
+    private final Map<String, Food> foodBasket;          // Yemekler için ayrı bir basket
 
-    public BasketManager(){
-        basket = new HashMap<>();
+    public BasketManager() {
+        beverageBasket = new HashMap<>();
+        foodBasket = new HashMap<>();
     }
 
-    // Adds a product to the Basket
-    public void addToBasket(Food food){
+    public void addToBasket(Food food) {
         if (food == null) {
-            System.out.println("The selected product is not available in the menu. ");
+            System.out.println("The selected product is not available in the menu.");
             return;
         }
-        basket.put(food, basket.getOrDefault(food,0) + 1);
-        System.out.println(food.getProductName() + " added to the basket ");
-    }
+        String key = food.getProductName().toLowerCase().trim().replaceAll("\\s+", " ");
 
-    public void addBeverageToBasket(Beverage beverage){
-        if (beverage != null) {
-            basket.put(beverage, basket.getOrDefault(beverage, 0) + 1);
-            System.out.println(beverage.getName() + " added to the basket");
-            System.out.println("Choose size of your beverage: Small, Medium, Large");
+        if (foodBasket.containsKey(key)) {
+            Food existingFood = foodBasket.get(key);
+            existingFood.setQuantity(existingFood.getQuantity() + 1);
+            System.out.println(food.getProductName() + " quantity increased to " + existingFood.getQuantity() + ".");
         } else {
-            System.out.println("The selected product is not available in the menu. ");
-
+            food.setQuantity(1);
+            foodBasket.put(key, food);
+            System.out.println(food.getProductName() + " added to the basket.");
         }
     }
 
+    public void addBeverageToBasket(Beverage beverage) {
+        if (beverage != null) {
+            String key = beverage.getName().toLowerCase().trim().replaceAll("\\s+", " ");
+            if (beverage.getSize() != null) {
+                key += "/" + beverage.getSize().getName().toLowerCase().trim();
+            }
 
-    // Displays the contents of the Basket
-    public void showBasket(){
-        if(basket.isEmpty()) {
-            System.out.println("Your basket is empty. ");
+            if (beverageBasket.containsKey(key)) {
+                Beverage existingBeverage = beverageBasket.get(key);
+                existingBeverage.addToBasket();
+                System.out.println(beverage.getName() + " (" + beverage.getSize().getName() + ") quantity increased to " + existingBeverage.getQuantity() + ".");
+            } else {
+                beverageBasket.put(key, beverage);
+                System.out.println(beverage.getName() + " (" + (beverage.getSize() != null ? beverage.getSize().getName() : "N/A") + ") added to the basket.");
+            }
+        } else {
+            System.out.println("The selected product is not available in the menu.");
+        }
+    }
+
+    public boolean removeFromBasket(String productName, String size, int quantity) {
+        boolean itemFound = false;
+        String key = productName.toLowerCase().trim();
+        if (size != null) {
+            key += "/" + size.toLowerCase().trim();
+        }
+
+        if (beverageBasket.containsKey(key)) {
+            Beverage beverage = beverageBasket.get(key);
+            if (beverage.getQuantity() > quantity) {
+                beverage.setQuantity(beverage.getQuantity() - quantity);
+                System.out.println(quantity + " " + beverage.getName() + " (" + beverage.getSize().getName() + ") removed from the basket.");
+            } else {
+                beverageBasket.remove(key);
+                System.out.println(beverage.getName() + " (" + beverage.getSize().getName() + ") completely removed from the basket.");
+            }
+            itemFound = true;
+        }
+
+        if (foodBasket.containsKey(key)) {
+            Food food = foodBasket.get(key);
+            if (food.getQuantity() > quantity) {
+                food.setQuantity(food.getQuantity() - quantity);
+                System.out.println(quantity + " " + food.getProductName() + " removed from the basket.");
+            } else {
+                foodBasket.remove(key);
+                System.out.println(food.getProductName() + " completely removed from the basket.");
+            }
+            itemFound = true;
+        }
+
+        if (!itemFound) {
+            System.out.println(productName + (size != null ? "/" + size : "") + " is not in the basket.");
+        }
+
+        return itemFound;
+    }
+
+    public boolean removeFromBasketByIndex(int index, int quantity) {
+        int currentIndex = 1;
+        boolean itemFound = false;
+
+        for (Map.Entry<String, Beverage> entry : beverageBasket.entrySet()) {
+            if (currentIndex == index) {
+                Beverage beverage = entry.getValue();
+                if (beverage.getQuantity() > quantity) {
+                    beverage.setQuantity(beverage.getQuantity() - quantity);
+                    System.out.println(quantity + " " + beverage.getName() + " (" + beverage.getSize().getName() + ") removed from the basket.");
+                } else {
+                    beverageBasket.remove(entry.getKey());
+                    System.out.println(beverage.getName() + " (" + beverage.getSize().getName() + ") completely removed from the basket.");
+                }
+                itemFound = true;
+                break;
+            }
+            currentIndex++;
+        }
+
+        for (Map.Entry<String, Food> entry : foodBasket.entrySet()) {
+            if (currentIndex == index) {
+                Food food = entry.getValue();
+                if (food.getQuantity() > quantity) {
+                    food.setQuantity(food.getQuantity() - quantity);
+                    System.out.println(quantity + " " + food.getProductName() + " removed from the basket.");
+                } else {
+                    foodBasket.remove(entry.getKey());
+                    System.out.println(food.getProductName() + " completely removed from the basket.");
+                }
+                itemFound = true;
+                break;
+            }
+            currentIndex++;
+        }
+
+        if (!itemFound) {
+            System.out.println("Item with index " + index + " is not in the basket.");
+        }
+
+        return itemFound;
+    }
+
+    public void showBasket() {
+        if (beverageBasket.isEmpty() && foodBasket.isEmpty()) {
+            System.out.println("Your basket is empty.");
             return;
         }
-        System.out.println("Basket Contents: ");
-        for (CafeItem cafeItem: basket.keySet()) {
-            System.out.println(cafeItem.getProductName() + " - Quantity: " + basket.get(cafeItem));
+        System.out.println("Basket Contents:");
+        int itemNumber = 1;
+
+        for (Beverage beverage : beverageBasket.values()) {
+            String aliasPart = (beverage.getAlias() != null && !beverage.getAlias().isEmpty()) ? " (Alias: " + beverage.getAlias() + ")" : "";
+            String sizePart = (beverage.getSize() != null) ? " (" + beverage.getSize().getName() + ")" : "";
+            System.out.println(itemNumber + ". " + beverage.getName() + aliasPart + sizePart + " - Quantity: " + beverage.getQuantity() +
+                    ", Total Price: TL" + String.format("%.2f", beverage.calculateTotalPrice()));
+            itemNumber++;
         }
-    }
 
-    public void removeItemBasket(CafeItem cafeItem){
-        basket.remove(cafeItem,basket.get(cafeItem)+1);
-        System.out.println(basket.get(cafeItem.getProductName()) + "is removed from the basket.");
-    }
-
-    public CafeItem getItemFromBasket(String name){
-        for (CafeItem cafeItem : basket.keySet()){
-            if (cafeItem.getProductName().equalsIgnoreCase(name)){
-                return cafeItem;
-            }
+        for (Food food : foodBasket.values()) {
+            String aliasPart = (food.getAlias() != null && !food.getAlias().isEmpty()) ? " (Alias: " + food.getAlias() + ")" : "";
+            System.out.println(itemNumber + ". " + food.getProductName() + aliasPart + " - Quantity: " + food.getQuantity() +
+                    ", Total Price: TL" + String.format("%.2f", food.calculateTotalPrice()));
+            itemNumber++;
         }
-        System.out.println("Product not found in basket");
-        return null;
+        System.out.println("Type 'remove' to delete an item, or 'back' to return to the previous menu.");
     }
-
-    public double calculateTotalCafe(){
-        double total = 0.0;
-        for (CafeItem cafeItem : basket.keySet()){
-            total += cafeItem.getPrice() * basket.get(cafeItem);
-        }
-        return total;
-    }
-
-    public void makePayment(double payment, double total){
-        if (payment < total){
-            System.out.println("Insufficient funds! Please type total.");
-        } else if (payment > total) {
-            System.out.println("Payment successful! Your money back : " + (payment - total));
-        } else if (total == 0.0){
-            System.out.println("Your basket is empty!");
-        } else if (total == payment) {
-            System.out.println("Payment successful!");
-        }
-    }
-
-
-
-
 }

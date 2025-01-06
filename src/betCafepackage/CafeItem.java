@@ -31,7 +31,7 @@ package betCafepackage;
         }
 
 
-        // Abstract method for calculating price based on some parameters
+
         public  double calculatePrice(){
 
             return 0;

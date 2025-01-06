@@ -50,8 +50,17 @@ public class BooksBasketManager {
 
     }
     public void removeBookBasket(Book book) {
-        booksBasket.remove(book,booksBasket.get(book) + 1);
-        System.out.println(book.getTitle() + " by " + book.getAuthor() + " was removed from basket.");
+            if (booksBasket.containsKey(book)) {
+                int quantity = booksBasket.get(book); // Get the current quantity
+                if (quantity > 1) {
+                    booksBasket.put(book, quantity - 1); // Decrease the quantity by 1
+                } else {
+                    booksBasket.remove(book); // Remove the book entirely if the quantity is 1
+                }
+                System.out.println(book.getTitle() + " by: " + book.getAuthor() + " was removed from your basket");
+            } else {
+                System.out.println("Book not found in the basket.");
+            }
     }
     public void showBooksBasket(){
         if(booksBasket.isEmpty()){
@@ -60,7 +69,9 @@ public class BooksBasketManager {
         }
         System.out.println("Basket Contents: ");
         for (Book book: booksBasket.keySet()) {
-            System.out.println(book.getTitle() + " - Quantity: "+ booksBasket.get(book));
+            System.out.println(book.getTitle() + " - Quantity: "+ booksBasket.get(book) + " Price: " + book.getPrice());
+            System.out.println("Type 'back' to return to menu or continue to add items. \n" +
+                    "Type 'remove' if you want to remove items from basket");
         }
     }
 }

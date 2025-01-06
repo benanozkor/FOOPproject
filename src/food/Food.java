@@ -8,14 +8,23 @@ public abstract class Food extends CafeItem {
     private String foodType;
     private boolean forVegans;
     private String foodContent;
+    private int quantity = 1;
 
+    public int getQuantity() {
+        return quantity;
+    }
 
-    public Food(){
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public Food() {
 
     }
-    public Food(String productName, double price, int calories, String foodType, boolean forVegans, String foodContent){
-        super(productName,price);
-        this.calories= calories;
+
+    public Food(String productName, double price, int calories, String foodType, boolean forVegans, String foodContent) {
+        super(productName, price);
+        this.calories = calories;
         this.foodType = foodType;
         this.forVegans = forVegans;
         this.foodContent = foodContent;
@@ -45,12 +54,23 @@ public abstract class Food extends CafeItem {
         this.forVegans = forVegans;
     }
 
-
     public String getFoodContent() {
         return foodContent;
     }
 
     public void setFoodContent(String foodContent) {
         this.foodContent = foodContent;
+    }
+
+    public void addToBasket() {
+        this.quantity++;
+    }
+
+    public double calculateTotalPrice() {
+        return getPrice() * quantity;
+    }
+
+    public void display() {
+        System.out.println("Food: " + getProductName() + ", Quantity: " + quantity + ", Total Price: TL" + String.format("%.2f", calculateTotalPrice()));
     }
 }

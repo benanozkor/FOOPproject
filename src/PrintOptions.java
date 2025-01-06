@@ -48,14 +48,14 @@ public interface PrintOptions {
     String welcome = """
                      Welcome to BET cafe!  (type section NUMBER or NAME!!!)
                 ------------------------------------------------------------
-                1. Coffee          Section
+                1. Beverage          Section
                 2. Food            Section
                 3. Books           Section   
                 ------------------------------------------------------------
                 
                 """;
 
-    String coffeeMenu = """
+    String beveragesMenu = """
              Welcome to Food Section!   (to add product to basket enter it's NUMBER or NAME!!!)
                 -------------------------------------------------------------------------------------------
                                  Hot                                                 Cold
@@ -92,7 +92,7 @@ public interface PrintOptions {
 
 
 
-    String coffeeMenuName = " CoffeeMenu.txt";
+    String beveragesMenuName = " BeveragesMenu.txt";
     String welcomeFileName = "WelcomeFile.txt";
     String menuFileName = "CafeMenu.txt";
     String booksFileName = "BooksSection.txt";

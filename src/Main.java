@@ -1,14 +1,12 @@
-import betCafepackage.CafeItem;
-import beverage.Beverage;
-import books.Book;
-import food.*;
-
 import java.util.Scanner;
+import beverage.*;
+import food.*;
+import books.*;
 
-public class Main implements PrintOptions{
+public class Main implements PrintOptions {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String costumerInput;
+        String costumerInput = "";  // Varsayılan olarak boş bir string atanıyor.
 
         MenuManager menuManager = new MenuManager();
         BasketManager basketManager = new BasketManager();
@@ -16,127 +14,139 @@ public class Main implements PrintOptions{
         BooksBasketManager booksBasketManager = new BooksBasketManager();
         BeverageMenuManager beverageMenuManager = new BeverageMenuManager();
 
-
-
         while (true) {
             try {
-                // Creating welcome file and printing to the console
                 FileManager fileManager1 = new FileManager(welcomeFileName);
                 fileManager1.createFileContent(welcome);
                 fileManager1.printFileContent();
                 costumerInput = scanner.nextLine().trim();
+
                 if (costumerInput.equalsIgnoreCase("exit")) break;
 
-
-                // Checking if user choose books and if yes creating books file and print content
                 if (costumerInput.equalsIgnoreCase("books") || costumerInput.equalsIgnoreCase("3")) {
                     FileManager fileManager = new FileManager(booksFileName);
                     fileManager.createFileContent(booksContent);
                     fileManager.printFileContent();
-                    while (true) {
-                        costumerInput = scanner.nextLine().trim();
-                        if (costumerInput.equalsIgnoreCase("exit")) break;
-
-                        else if (costumerInput.equalsIgnoreCase("basket")) {
-                            while (true) {
-                                booksBasketManager.showBooksBasket();
-                                costumerInput = scanner.nextLine().trim();
-                                //booksBasketManager.removeBookBasket(booksBasketManager.getBookBasket(costumerInput));
-                                if (costumerInput.equalsIgnoreCase("payment")){
-                                    while (true) {
-                                        System.out.println("Your total is: " + booksBasketManager.calculateTotalBooks() + " Please type exact total to make payment!");
-                                        costumerInput = String.valueOf(scanner.nextDouble());
-                                        booksBasketManager.makePaymentBooks(Double.parseDouble(costumerInput), booksBasketManager.calculateTotalBooks());
-                                    }
-
-                                }
-                            }
-
-                        } else {
-                            Book chosenBook;
-                            try {
-                                int sectionNumber = Integer.parseInt(costumerInput);
-                                booksManager.booksBySection(String.valueOf(sectionNumber));
-                            } catch (NumberFormatException exception) {
-                                chosenBook = booksManager.getBook(costumerInput);
-                                booksBasketManager.addToBooksBasket(chosenBook);
-                            }
-                        }
-                    }
-                    // Checking if user choose food and if yes creating food file and print content
-
+                    handleBooksSection(scanner, booksManager, booksBasketManager);
                 } else if (costumerInput.equalsIgnoreCase("food") || costumerInput.equalsIgnoreCase("2")) {
-                        FileManager fileManager = new FileManager(menuFileName);
-                        fileManager.createFileContent(menu);
-                        fileManager.printFileContent();
-                    while (true) {
-                        costumerInput = scanner.nextLine();
-                        // break the while loop
-                        if (costumerInput.equalsIgnoreCase("exit")) {
-                            break;
-                            //showing basket
-                        } else if (costumerInput.equalsIgnoreCase("basket")) {
-                            basketManager.showBasket();
-                        }
-                        Food chosenProduct = null;
-                        try {
-                            // Checking if input is a number
-                            int productNumber = Integer.parseInt((costumerInput));
-                            chosenProduct = menuManager.getProductByNumber(productNumber);
-                            basketManager.addToBasket(chosenProduct);
-                            // if not number assume it is a product name
-                        } catch (NumberFormatException exception) {
-                            chosenProduct = menuManager.getProduct(costumerInput);
-                            basketManager.addToBasket(chosenProduct);
-                        }
-
-                    }
-
-                    // Checking if user choose coffee and if yes creating coffee file and print content
-                } else if (costumerInput.equalsIgnoreCase("coffee") || costumerInput.equalsIgnoreCase("1")) {
-                    FileManager fileManager = new FileManager(coffeeMenuName);
-                    fileManager.createFileContent(coffeeMenu);
+                    FileManager fileManager = new FileManager(menuFileName);
+                    fileManager.createFileContent(menu);
                     fileManager.printFileContent();
-                    costumerInput = scanner.nextLine().trim().toLowerCase();
-                    while (true) {
-                        Beverage choosenBeverage = null;
-                        try {
-                            // Checking if input is a number
-                            int productNumber = Integer.parseInt((costumerInput));
-                            choosenBeverage = beverageMenuManager.getBeverageByNumber(productNumber);
-                            basketManager.addBeverageToBasket(choosenBeverage);
-                            // if not number assume it is a product name
-                        } catch (NumberFormatException exception) {
-                            choosenBeverage = beverageMenuManager.getBeverage(costumerInput);
-                            basketManager.addBeverageToBasket(choosenBeverage);
-                        }
-                        costumerInput = scanner.nextLine().trim().toLowerCase();
-                        beverageMenuManager.chooseSize(costumerInput,choosenBeverage);
-                        System.out.println(choosenBeverage.getProductName() + " " + choosenBeverage.getPrice());
-                        costumerInput = scanner.nextLine();
-                        if (costumerInput.equalsIgnoreCase("back")){
-                            break;
-                        }
-                        if (costumerInput.equalsIgnoreCase("basket")){
-                            basketManager.showBasket();
-                        }
-
-
-
-
-
-                    }
-
+                    handleFoodSection(scanner, menuManager, basketManager);
+                } else if (costumerInput.equalsIgnoreCase("beverage") || costumerInput.equalsIgnoreCase("1")) {
+                    FileManager fileManager = new FileManager(beveragesMenuName);
+                    fileManager.createFileContent(beveragesMenu);
+                    fileManager.printFileContent();
+                    handleBeverageSection(scanner, beverageMenuManager, basketManager);
                 }
+
             } catch (NullPointerException exception) {
-                System.out.println("Input can not be null! Please enter your choice. " + exception.getMessage());
+                System.out.println("Input cannot be null! Please enter your choice. " + exception.getMessage());
             } catch (Exception exception) {
                 System.out.println("Invalid value! Please enter your choice. " + exception.getMessage());
             }
         }
-
-
     }
 
+    private static void handleBooksSection(Scanner scanner, BooksManager booksManager, BooksBasketManager booksBasketManager) {
+        String costumerInput = "";  // Varsayılan olarak boş string atanıyor.
+        while (true) {
+            costumerInput = scanner.nextLine().trim();
+            if (costumerInput.equalsIgnoreCase("exit")) break;
+            if (costumerInput.equalsIgnoreCase("menu")) return;
+            if (costumerInput.equalsIgnoreCase("basket")) {
 
+
+
+                booksBasketManager.showBooksBasket();
+                while (true) {
+                    String nextAction = scanner.nextLine().trim().toLowerCase();
+                    if (nextAction.equals("back")) break;
+                    if (nextAction.equals("remove")) {
+                        System.out.println("Type title of book to remove from your basket");
+                        nextAction = scanner.nextLine().trim();
+                        Book bookToRemove = booksBasketManager.getBookBasket(nextAction);
+                        booksBasketManager.removeBookBasket(bookToRemove);
+                    }
+                    if (nextAction.equals("payment")) {
+                        System.out.println("Your total is " + booksBasketManager.calculateTotalBooks() + "TL. Please type sum to make payment.");
+                        nextAction = scanner.nextLine().trim();
+                        booksBasketManager.makePaymentBooks(Double.parseDouble(nextAction), booksBasketManager.calculateTotalBooks());
+                    }
+                }
+
+            }
+            try {
+                int sectionNumber = Integer.parseInt(costumerInput);
+                booksManager.booksBySection(String.valueOf(sectionNumber));
+            } catch (NumberFormatException exception) {
+                Book chosenBook = booksManager.getBook(costumerInput);
+                booksBasketManager.addToBooksBasket(chosenBook);
+            }
+
+        }
+    }
+
+    private static void handleFoodSection(Scanner scanner, MenuManager menuManager, BasketManager basketManager) {
+        String costumerInput = "";  // Varsayılan olarak boş string atanıyor.
+        while (true) {
+            costumerInput = scanner.nextLine();
+            if (costumerInput.equalsIgnoreCase("exit")) break;
+            if (costumerInput.equalsIgnoreCase("menu")) return;
+            if (costumerInput.equalsIgnoreCase("basket")) {
+                basketManager.showBasket();
+                System.out.println("Type 'back' to return to menu or continue to add items.");
+                String nextAction = scanner.nextLine().trim().toLowerCase();
+                if (nextAction.equals("back")) {
+                    break;
+                }
+            } else {
+                try {
+                    int productNumber = Integer.parseInt(costumerInput);
+                    Food chosenProduct = menuManager.getProductByNumber(productNumber);
+                    basketManager.addToBasket(chosenProduct);
+                } catch (NumberFormatException exception) {
+                    Food chosenProduct = menuManager.getProduct(costumerInput);
+                    basketManager.addToBasket(chosenProduct);
+                }
+            }
+        }
+    }
+
+    private static void handleBeverageSection(Scanner scanner, BeverageMenuManager beverageMenuManager, BasketManager basketManager) {
+        String costumerInput = "";  // Varsayılan olarak boş string atanıyor.
+        while (true) {
+            costumerInput = scanner.nextLine().trim();
+            if (costumerInput.equalsIgnoreCase("exit")) break;
+            if (costumerInput.equalsIgnoreCase("menu")) return;
+            if (costumerInput.equalsIgnoreCase("basket")) {
+                basketManager.showBasket();
+                System.out.println("Type 'back' to return to menu or continue to add items.");
+                String nextAction = scanner.nextLine().trim().toLowerCase();
+                if (nextAction.equals("back")) {
+                    break;
+                }
+            } else {
+                try {
+                    int productNumber = Integer.parseInt(costumerInput);
+                    Beverage chosenBeverage = beverageMenuManager.getBeverageByNumber(productNumber);
+                    System.out.println("Choose size of your beverage: Small, Medium, Large");
+                    String sizeInput = scanner.nextLine().trim().toLowerCase();
+                    Size selectedSize = switch (sizeInput) {
+                        case "small" -> Size.Small;
+                        case "medium" -> Size.Medium;
+                        case "large" -> Size.Large;
+                        default -> {
+                            System.out.println("Invalid size! Defaulting to Small.");
+                            yield Size.Small;
+                        }
+                    };
+                    Beverage sizedBeverage = chosenBeverage.createWithNewSize(selectedSize);
+                    basketManager.addBeverageToBasket(sizedBeverage);
+                } catch (NumberFormatException exception) {
+                    System.out.println("The selected product is not available in the menu.");
+                }
+            }
+        }
+    }
 }

@@ -3,7 +3,7 @@ import betCafepackage.BetCafe;
 
 import java.io.Serializable;
 
-public abstract class Book extends BetCafe implements Serializable {
+public abstract class Book extends BetCafe {
 
 
     private String title;

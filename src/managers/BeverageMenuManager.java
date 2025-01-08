@@ -74,21 +74,4 @@ public class BeverageMenuManager {
         String name = beverageOrderedNames.get(number - 1);
         return beverageMenu.get(name.toLowerCase());
     }
-
-    // İçeceğin boyutunu değiştir
-    public Beverage chooseSize(String size, Beverage beverage) {
-        Size newSize;
-        switch (size.toLowerCase()) {
-            case "medium":
-                newSize = Size.Medium;
-                break;
-            case "large":
-                newSize = Size.Large;
-                break;
-            default:
-                newSize = Size.Small;
-                break;
-        }
-        return beverage.createWithNewSize(newSize);
-    }
 }

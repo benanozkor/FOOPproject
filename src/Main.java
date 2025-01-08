@@ -7,7 +7,7 @@ import managers.*;
 public class Main implements PrintOptions {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String costumerInput = "";  // Varsayılan olarak boş bir string atanıyor.
+        String costumerInput = "";
 
         MenuManager menuManager = new MenuManager();
         BasketManager basketManager = new BasketManager();
@@ -68,7 +68,7 @@ public class Main implements PrintOptions {
     }
 
     private static void handleBooksSection(Scanner scanner, BooksManager booksManager, BooksBasketManager booksBasketManager) {
-        String costumerInput = "";  // Varsayılan olarak boş string atanıyor.
+        String costumerInput = "";
         while (true) {
             costumerInput = scanner.nextLine().trim();
             if (costumerInput.equalsIgnoreCase("exit")) break;
@@ -105,7 +105,7 @@ public class Main implements PrintOptions {
     }
 
     private static void handleFoodSection(Scanner scanner, MenuManager menuManager, BasketManager basketManager) {
-        String costumerInput = "";  // Varsayılan olarak boş string atanıyor.
+        String costumerInput = "";
         while (true) {
             costumerInput = scanner.nextLine();
             if (costumerInput.equalsIgnoreCase("exit")) break;
@@ -165,7 +165,7 @@ public class Main implements PrintOptions {
 
 
     private static void handleBeverageSection(Scanner scanner, BeverageMenuManager beverageMenuManager, BasketManager basketManager) {
-        String costumerInput = "";  // Varsayılan olarak boş string atanıyor.
+        String costumerInput = "";
         while (true) {
             costumerInput = scanner.nextLine().trim();
             if (costumerInput.equalsIgnoreCase("exit")) break;

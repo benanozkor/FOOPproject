@@ -32,10 +32,7 @@ package betCafepackage;
 
 
 
-        public  double calculatePrice(){
 
-            return 0;
-        }
     }
 
 

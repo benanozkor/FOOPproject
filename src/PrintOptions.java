@@ -62,11 +62,11 @@ public interface PrintOptions {
                 ----------------------------------------           ----------------------------------------
                 Coffees                                            Iced Coffees
                 ----------------------------------------           ----------------------------------------
-                1. Americano                    - 105 TL           14. Iced Latte                  - 130 TL
-                2. Espresso                     - 75 TL            15. Iced Mocha                  - 140 TL
-                3. Turkish Coffee               - 90 TL            16. Iced Americano              - 120 TL
-                4. Latte                         - 135 TL          17. Caramel Frappuccino         - 160 TL
-                5. Cappuccino                    - 120 TL          18. Vanilla Iced Coffee         - 135 TL
+                1. Americano                     - 105 TL           14. Iced Latte                  - 130 TL
+                2. Espresso                      - 75 TL            15. Iced Mocha                  - 140 TL
+                3. Turkish Coffee                - 90 TL            16. Iced Americano              - 120 TL
+                4. Latte                         - 135 TL           17. Caramel Frappuccino         - 160 TL
+                5. Cappuccino                    - 120 TL           18. Vanilla Iced Coffee         - 135 TL
                 6. Mocha                         - 150 TL           ----------------------------------------
                 7. Macchiato                     - 110 TL           Iced Teas
                 8. Flat White                    - 140 TL           ----------------------------------------

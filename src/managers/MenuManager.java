@@ -59,12 +59,4 @@ public class MenuManager {
         }
         return null;
     }
-
-    public HashMap<String, Food> getMenu() {
-        return menu;
-    }
-
-    public ArrayList<String> getOrderedNames() {
-        return orderedNames;
-    }
 }

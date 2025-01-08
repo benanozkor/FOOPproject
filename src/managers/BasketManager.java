@@ -56,44 +56,6 @@ public class BasketManager {
         }
     }
 
-    public boolean removeFromBasket(String productName, String size, int quantity) {
-        boolean itemFound = false;
-        String key = productName.toLowerCase().trim();
-        if (size != null) {
-            key += "/" + size.toLowerCase().trim();
-        }
-
-        if (beverageBasket.containsKey(key)) {
-            Beverage beverage = beverageBasket.get(key);
-            if (beverage.getQuantity() > quantity) {
-                beverage.setQuantity(beverage.getQuantity() - quantity);
-                System.out.println(quantity + " " + beverage.getName() + " (" + beverage.getSize().getName() + ") removed from the basket.");
-            } else {
-                beverageBasket.remove(key);
-                System.out.println(beverage.getName() + " (" + beverage.getSize().getName() + ") completely removed from the basket.");
-            }
-            itemFound = true;
-        }
-
-        if (foodBasket.containsKey(key)) {
-            Food food = foodBasket.get(key);
-            if (food.getQuantity() > quantity) {
-                food.setQuantity(food.getQuantity() - quantity);
-                System.out.println(quantity + " " + food.getProductName() + " removed from the basket.");
-            } else {
-                foodBasket.remove(key);
-                System.out.println(food.getProductName() + " completely removed from the basket.");
-            }
-            itemFound = true;
-        }
-
-        if (!itemFound) {
-            System.out.println(productName + (size != null ? "/" + size : "") + " is not in the basket.");
-        }
-
-        return itemFound;
-    }
-
     public boolean removeFromBasketByIndex(int index, int quantity) {
         int currentIndex = 1;
         boolean itemFound = false;
